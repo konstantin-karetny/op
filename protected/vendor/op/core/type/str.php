@@ -1,6 +1,6 @@
 <?php
 
-namespace Ada\Core\Type;
+namespace Op\Core\Type;
 
 class Str extends Type
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Ada\Core\Type;
+namespace Op\Core\Type;
 
-abstract class Type extends \Ada\Core\Proto
+abstract class Type extends \Op\Core\Proto
 {
     protected
         $core;

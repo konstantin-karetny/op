@@ -1,6 +1,6 @@
 <?php
 
-namespace Ada\Core;
+namespace Op\Core;
 
 class App extends Proto
 {
