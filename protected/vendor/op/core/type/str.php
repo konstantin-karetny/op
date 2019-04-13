@@ -4,29 +4,57 @@ namespace Op\Core\Type;
 
 class Str extends Type
 {
-    public static function init(string $string = '')
+    protected
+        $string;
+
+    public static function init($string = null)
     {
         return parent::init($string);
     }
 
-    public function __construct(string $string = '')
+    public function __construct($string = '')
     {
-        parent::__construct($string);
+        $this->set($string);
     }
 
     public function __toString(): string
     {
-        return $this->res();
+        return $this->out();
     }
 
     public function concat(Str $string): Str
     {
-        $this->core = static::init($this . $string)->res();
+        $this->set(static::init($this . $string));
         return $this;
     }
 
-    public function res(): string
+    public function concatLeft(Str $string): Str
     {
-        return parent::res();
+        $this->set(static::init($string . $this));
+        return $this;
+    }
+
+    public function getType(): Cmd
+    {
+        return Cmd::init('str');
+    }
+
+    public function out(): string
+    {
+        return $this->string;
+    }
+
+    protected function convert($string): string
+    {
+        if (!is_scalar($string)) {
+            return '';
+        }
+        settype($string, 'string');
+        return $string;
+    }
+
+    protected function set($string)
+    {
+        $this->string = $this->convert($string);
     }
 }

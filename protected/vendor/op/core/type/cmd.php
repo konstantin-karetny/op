@@ -4,12 +4,20 @@ namespace Op\Core\Type;
 
 class Cmd extends Str
 {
-    public function __construct(string $string = '')
+    protected function convert($string): string
     {
-        parent::__construct(
+        return
             strtolower(
-                preg_replace('/[^a-z0-9_]/i', '', $string)
-            )
-        );
+                preg_replace(
+                    '/[^a-z0-9_]/i',
+                    '',
+                    parent::convert($string)
+                )
+            );
+    }
+
+    public function getType(): Cmd
+    {
+        return Cmd::init('cmd');
     }
 }

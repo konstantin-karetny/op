@@ -4,23 +4,45 @@ namespace Op\Core\Type;
 
 class Arr extends Type
 {
-    public static function init(array $array = [])
+    protected
+        $array;
+
+    public static function init($array = [])
     {
         return parent::init($array);
     }
 
-    public function __construct(array $array = [])
+    public function __construct($array = [])
     {
-        parent::__construct($array);
+        $this->set($array);
     }
 
-    public function res(): array
+    public function getType(): Cmd
     {
-        return parent::res();
+        return Cmd::init('arr');
     }
 
-    public function val(Cmd $key)
+    public function out(): array
     {
-        return $this->res()[$key->res()];
+        return $this->array;
+    }
+
+    public function value(Cmd $key)
+    {
+        return $this->out()[$key->out()];
+    }
+
+    protected function convert($array): array
+    {
+        if (!is_array($array)) {
+            return [];
+        }
+        settype($array, 'array');
+        return  $array;
+    }
+
+    protected function set($array)
+    {
+        $this->array = $this->convert($array);
     }
 }

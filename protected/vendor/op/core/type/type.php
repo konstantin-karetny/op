@@ -4,26 +4,13 @@ namespace Op\Core\Type;
 
 abstract class Type extends \Op\Core\Proto
 {
-    protected
-        $core;
+    abstract public function __construct($subject = null);
 
-    public static function init()
-    {
-        return parent::init(...func_get_args());
-    }
+    abstract public function getType(): Cmd;
 
-    public function __construct($core = null)
-    {
-        $this->core = $core;
-    }
+    abstract public function out();
 
-    public function res()
-    {
-        return $this->core;
-    }
+    abstract protected function convert($subject);
 
-    public function getName(): Cmd
-    {
-        return Cmd::init(substr(strrchr(get_class($this), '\\'), 1));
-    }
+    abstract protected function set($subject);
 }
