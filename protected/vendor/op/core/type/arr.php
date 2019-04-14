@@ -4,8 +4,7 @@ namespace Op\Core\Type;
 
 class Arr extends Type
 {
-    protected
-        $array;
+    protected $array;
 
     public static function init($array = [])
     {
@@ -32,17 +31,17 @@ class Arr extends Type
         return $this->out()[$key->out()];
     }
 
-    protected function convert($array): array
+    protected function convert($subject): array
     {
-        if (!is_array($array)) {
+        if (!is_array($subject)) {
             return [];
         }
-        settype($array, 'array');
-        return  $array;
+        settype($subject, 'array');
+        return  $subject;
     }
 
-    protected function set($array)
+    protected function set($subject)
     {
-        $this->array = $this->convert($array);
+        $this->array = $this->convert($subject);
     }
 }

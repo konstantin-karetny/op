@@ -8,13 +8,21 @@ spl_autoload_register();
 
 
 
+die(var_dump(Type\Str::init('asfda')->pos('asdf')));
+
+die(var_dump(
+
+Type\UInteger::init('safdaas-fd1-asdf5-')
+
+));
+
 
 die(var_dump(
 
     DataSet::init([
         'val1' => 1,
         'val2' => 'as!@#(**fd'
-    ])->getArr(Type\Cmd::init('val2'))
+    ])->getInteger(Type\Cmd::init('val2'))
 
 ));
 

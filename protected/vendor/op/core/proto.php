@@ -4,8 +4,7 @@ namespace Op\Core;
 
 class Proto
 {
-    protected
-        $config;
+    protected $config;
 
     public static function init()
     {

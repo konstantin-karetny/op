@@ -13,4 +13,9 @@ class DataSet extends Type\Arr
     {
         return Type\Cmd::init($this->value($key));
     }
+
+    public function getInteger(Type\Cmd $key): Type\Integer
+    {
+        return Type\Integer::init($this->value($key));
+    }
 }
