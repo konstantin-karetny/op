@@ -95,6 +95,25 @@ class Router extends Proto
         return $res;
     }
 
+    public function detectArgsPHP7(): array
+    {
+        if ($this->args === null) {
+            $this->args       = [];
+            $controller_class = $this->getControllerClass();
+            if ($controller_class) {
+                foreach ((new \ReflectionMethod($controller_class, $this->getTask()))->getParameters() as $param) {
+                    $arg                    = new \stdClass();
+                    $arg->name              = $param->getName();
+                    $arg->type              = $param->getType()->getName();
+                    $arg->required          = !$param->isOptional();
+                    $arg->default           = $arg->required ? null : $param->getDefaultValue();
+                    $this->args[$arg->name] = $arg;
+                }
+            }
+        }
+        return $this->args;
+    }
+
     protected function detectController()
     {
         return
